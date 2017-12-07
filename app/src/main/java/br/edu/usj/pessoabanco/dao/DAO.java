@@ -15,5 +15,7 @@ public interface DAO<T> {
     Boolean atualizar(T objeto);
 
     List<T> listar();
+
+    T obterPorId(int id);
     
 }

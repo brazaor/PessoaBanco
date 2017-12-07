@@ -48,7 +48,7 @@ public class PessoaDAO implements DAO<Pessoa> {
         SQLiteDatabase db = helper.getWritableDatabase();
 
         String idString = String.valueOf(id);
-        int removeu = db.delete(NOME_TABELA, "id = ?", new String[]{idString});
+        int removeu = db.delete(NOME_TABELA, "_id = ?", new String[]{idString});
 
         if (removeu > 0){
             return true;
@@ -66,7 +66,9 @@ public class PessoaDAO implements DAO<Pessoa> {
         values.put("nome", p.getNome());
         values.put("idade", p.getIdade());
 
-        int atualizou = db.update(NOME_TABELA, values, "id = ?", new String[p.getId()]);
+        String idString = String.valueOf(p.getId());
+
+        int atualizou = db.update(NOME_TABELA, values, "_id = ?", new String[]{idString});
 
         if (atualizou > 0){
             return true;
@@ -92,8 +94,33 @@ public class PessoaDAO implements DAO<Pessoa> {
             p.setIdade(cursor.getInt(cursor.getColumnIndex("idade")));
 
             pessoas.add(p);
+            cursor.moveToNext();
         }
 
+        cursor.close();
+
         return pessoas;
+    }
+
+    @Override
+    public Pessoa obterPorId(int id) {
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String idString = String.valueOf(id);
+
+        Cursor cursor = db.rawQuery("SELECT _id, nome, idade FROM " + NOME_TABELA + " WHERE _id = ?", new String[]{idString});
+
+        Pessoa p = null;
+
+        if (cursor.moveToNext()){
+            p = new Pessoa();
+            p.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+            p.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+            p.setIdade(cursor.getInt(cursor.getColumnIndex("idade")));
+        }
+
+        cursor.close();
+
+        return p;
     }
 }

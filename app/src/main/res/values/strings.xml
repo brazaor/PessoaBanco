@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Pessoa Banco</string>
+    <string name="cadastro_pessoa">Cadastro de Pessoas</string>
+    <string name="nome">Nome</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="listar">Listar Pessoas</string>
+    <string name="idade">Idade</string>
+    <string name="listar_pessoas">Listar Pessoas</string>
+    <string name="editar">Editar</string>
+    <string name="remover">Remover</string>
+    <string name="opcoes">Opções</string>
+    <string name="confirmacao_exclusao_pessoa">Confirma exclusão da pessoa?</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="remover_sucesso">Pessoa removida com sucesso</string>
+    <string name="voltar">Voltar</string>
 </resources>
